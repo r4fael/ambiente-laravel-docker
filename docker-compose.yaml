@@ -1,0 +1,35 @@
+version: "3.7"
+
+services:
+  app:
+    build:
+      args:
+        user: laravel
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: rofael/ambiente-php-laravel:latest
+    container_name: app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+      #- ./.docker/php/php.ini:/usr/local/etc/php/php.ini
+    networks:
+      - app-network
+
+  server:
+    image: nginx:alpine
+    container_name: app-server
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www
+      - ./.docker/nginx:/etc/nginx/conf.d/
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
