@@ -1,4 +1,4 @@
-Versão Atual com:
+<h1>Versão Atual</h1>
 - Ambiente PHP 8.1-fpm
 - Composer (lateste)
 - GIT (lateste)
@@ -25,7 +25,62 @@ Versão Atual com:
 -- mysqli 
 
 
- - Sem Banco de Dados
+ - <strong>Não Contem Banco de Dados</strong>
 
 
- 
+<h1>Instalação do Docker (pré requisitos) </h1>
+<h2> Windowns WSL2</h2>
+
+### Tutorial oficial: 
+https://docs.microsoft.com/en-us/windows/wsl/install-win10
+
+### Passo 1 (PowerShell Admin): 
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+
+### Passo 2 (PowerShell Admin):
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+
+### Passo 3
+REINICIE O COMPUTADOR
+
+### Passo 4 (Download the Linux kernel update package):
+https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
+
+### Passo 5 (PowerShell Admin):
+wsl --set-default-version 2
+
+### Passo 7 (Instale o docker):
+Tutorial: https://docs.docker.com/docker-for-windows/install/
+
+<h2>Linux</h2>
+
+### https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04-pt
+
+
+<hr/>
+
+<h1> Comandos </h1>
+
+- Clone do Repositório: https://github.com/r4fael/ambiente-laravel-docker.git
+- Faça o build do ambiente: docker-compose up -d --build
+- Veja se os container estão ativos: docker  ps
+- Acesse o ambiente na porta configurada: http://localhost:8000/
+- Adicione a imagem do banco de dados de preferência no arquivos docker-compose-yml exemplo (
+Não esquecer e fazer o build novamente): 
+
+mysql:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: **colocar-a-senha-do-root-aqui**
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+    volumes:
+      - ./dados:/var/lib/mysql
+
+- Acesse o ambiente pelo terminal pelos comando: docker-compose exec -it app bash
+- Rode os comandos laravel neste terminal. Para sair: exit 
