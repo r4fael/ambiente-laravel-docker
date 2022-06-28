@@ -29,7 +29,7 @@
 
 
 <h1>Instalação do Docker (pré requisitos) </h1>
-<h2> Windowns WSL2</h2>
+<h2> Windows WSL2</h2>
 
 ### https://github.com/codeedu/wsl2-docker-quickstart#docker-engine-docker-nativo-diretamente-instalado-no-wsl2
 
@@ -44,15 +44,15 @@
 
 - Clone do Repositório: https://github.com/r4fael/ambiente-laravel-docker.git
 
-- Faça o build do ambiente: ``` docker-compose up -d --build ```. 
-Vai demorar um pouco baixando e instalando todas as dependências para criar os containers).
+- Acesse a pasta do projeto e faça o build do ambiente: ``` docker-compose up -d --build ```. 
+Vai demorar um pouco baixando e instalando todas as dependências para criar os containers.
 Caso precise rodar mais de um ambiente, renomeie o containers e redes dentro do arquivo docker-compose.yml para não conflitar com containers já instanciados.
 
-- Veja se os container estão ativos: ``` docker ps ```. 
-Se precisar parar algum ambinete, entre na pasta que está o docker-compose docker-compose.yml e use o comando ``` docker-compose down ``` ou ``` docker stop (nome do container que pode saber pelo docker ps) ```.
+- Depois de finalizar, veja se os container estão ativos: ``` docker ps ```.
+Se precisar parar algum ambinete, entre na pasta que está o docker-compose.yml e use o comando ``` docker-compose down ``` ou ``` docker stop (nome do container que pode saber pelo docker ps) ```.
 
-- Adicione a imagem do banco de dados de preferência no arquivos docker-compose-yml exemplo (
-Não esquecer e fazer o build novamente): 
+- Se quiser, adicione as instruções para carregar a imagem do banco de dados da sua preferência no arquivo docker-compose-yml. Exemplo (
+não esquecer e fazer o build novamente): 
 
 ````
 mysql:
@@ -69,6 +69,28 @@ mysql:
     volumes:
       - ./dados:/var/lib/mysql
 ````
+
+````
+
+  postgres:
+    container_name: postgres
+    image: postgres:9.5-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: **nome-base-de-dados**
+      POSTGRES_USER: **nome-user**
+      POSTGRES_PASSWORD: **senha**
+    ports:
+      - 5432:5432
+    volumes:
+      - ./database/data:/var/lib/postgresql/data
+
+
+````
+
+
+É possível ainda criar um docker-compose.yml em outra pasta para separar o banco de dados para utilizar em outros projetos. Lembre de mapear a pasta de dados (volumes) e expor a porta para acesso externo (ports)
+
 
 - Acesse o ambiente pelo terminal pelos comando: ``` docker-compose exec -it app bash ``` . O terminal deve estar na mesma pasta que o docker-compose-yml
 
