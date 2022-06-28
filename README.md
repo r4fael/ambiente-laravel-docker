@@ -74,7 +74,7 @@ mysql:
 
 postgres:
   container_name: postgres
-  image: postgres:9.5-alpine
+  image: postgres:14.4-alpine
   restart: always
   environment:
     POSTGRES_DB: **nome-base-de-dados**
