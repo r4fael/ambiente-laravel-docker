@@ -91,6 +91,6 @@ mysql:
       - ./dados:/var/lib/mysql
 ````
 
-- Acesse o ambiente pelo terminal pelos comando: docker-compose exec -it app bash
+- Acesse o ambiente pelo terminal pelos comando: ``` docker-compose exec -it app bash ``` . O terminal deve estar na mesma pasta que o docker-compose-yml
 
-- Rode os comandos laravel neste terminal. Para sair: exit 
+- Rode os comandos laravel neste terminal. Para sair: ``` exit ```.
