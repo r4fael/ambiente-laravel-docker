@@ -72,19 +72,20 @@ mysql:
 
 ````
 
-  postgres:
-    container_name: postgres
-    image: postgres:9.5-alpine
-    restart: always
-    environment:
-      POSTGRES_DB: **nome-base-de-dados**
-      POSTGRES_USER: **nome-user**
-      POSTGRES_PASSWORD: **senha**
-    ports:
-      - 5432:5432
-    volumes:
-      - ./database/data:/var/lib/postgresql/data
-
+postgres:
+  container_name: postgres
+  image: postgres:9.5-alpine
+  restart: always
+  environment:
+    POSTGRES_DB: **nome-base-de-dados**
+    POSTGRES_USER: **nome-user**
+    POSTGRES_PASSWORD: **senha**
+  ports:
+    - 5432:5432
+  networks:
+    - app-network
+  volumes:
+    - ./database/data:/var/lib/postgresql/data
 
 ````
 
