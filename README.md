@@ -70,8 +70,6 @@ Caso precise rodar mais de um ambiente, renomeie o containers e redes dentro do 
 - Veja se os container estão ativos: ``` docker ps ```. 
 Se precisar parar algum ambinete, entre na pasta que está o docker-compose docker-compose.yml e use o comando ``` docker-compose down ``` ou ``` docker stop (nome do container que pode saber pelo docker ps) ```.
 
-- Acesse o ambiente na porta configurada: http://localhost:8000/
-
 - Adicione a imagem do banco de dados de preferência no arquivos docker-compose-yml exemplo (
 Não esquecer e fazer o build novamente): 
 
@@ -94,3 +92,7 @@ mysql:
 - Acesse o ambiente pelo terminal pelos comando: ``` docker-compose exec -it app bash ``` . O terminal deve estar na mesma pasta que o docker-compose-yml
 
 - Rode os comandos laravel neste terminal. Para sair: ``` exit ```.
+
+- Criando um novo projeto: ``` composer create-project laravel/laravel example-app ```
+
+- Acesse o ambiente na porta configurada: http://localhost:8000/
