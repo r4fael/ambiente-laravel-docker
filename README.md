@@ -1,10 +1,10 @@
-<h1>Versão Atual</h1>
-- Ambiente PHP 8.1-fpm
-- Composer (lateste)
-- GIT (lateste)
-- NGINX Alpine (lateste)
-- NodeJs (lateste)
-- NPM (lateste)
+<h1>Ambiente Dev PHP Laravel</h1>
+- PHP 8.1-fpm
+- Composer (latest)
+- GIT (latest)
+- NGINX Alpine (latest)
+- NodeJs (latest)
+- NPM (latest)
 
 - Extras: 
 -- curl
