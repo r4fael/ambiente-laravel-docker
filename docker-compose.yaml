@@ -18,17 +18,47 @@ services:
     networks:
       - app-network
 
-  server:
-    image: nginx:alpine
-    container_name: app-server
-    restart: unless-stopped
-    ports:
-      - 8000:80
-    volumes:
-      - ./:/var/www
-      - ./.docker/nginx:/etc/nginx/conf.d/
-    networks:
-      - app-network
+  ###### DESCOMENTE OS CONTAINERS QUE PRECISAR ######
+
+  #server:
+    #image: nginx:alpine
+    #container_name: app-server
+    #restart: unless-stopped
+    #ports:
+      #- 8000:80
+    #volumes:
+      #- ./:/var/www
+      #- ./.docker/nginx:/etc/nginx/conf.d/
+    #networks:
+      #- app-network
+
+  #mysql:
+    #image: mysql
+    #command: --default-authentication-plugin=mysql_native_password
+    #container_name: mysql
+    #restart: unless-stopped
+    #environment:
+      #MYSQL_ROOT_PASSWORD: <<senha-root>>
+    #ports:
+      #- "3306:3306"
+    #networks:
+      #- app-network
+    #volumes:
+      #- ./.docker/dados/mysql:/var/lib/mysql
+
+  #postgres:
+    #container_name: postgres
+    #image: postgres:14.4-alpine
+    #restart: always
+    #environment:
+      #POSTGRES_USER: postgres
+      #POSTGRES_PASSWORD: <<senha-postgres>>
+    #ports:
+      #- 5432:5432
+    #networks:
+      #- app-network
+    #volumes:
+      #- ./.docker/dados/postgres:/var/lib/postgresql/data
 
 networks:
   app-network:
