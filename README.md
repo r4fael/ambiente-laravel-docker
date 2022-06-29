@@ -6,29 +6,12 @@
 - NodeJs (latest)
 - NPM (latest)
 
-- Extras: 
--- curl
--- libpng-dev
--- libonig-dev
--- libxml2-dev
--- libpq-dev
--- zip
--- unzip
--- pdo
--- pdo_pgsql
--- pdo_mysql
--- mbstring
--- exif 
--- pcntl 
--- bcmath
--- gd
--- mysqli 
+- Extras: curl | libpng-dev | libonig-dev | libxml2-dev | libpq-dev | zip | unzip | pdo | pdo_pgsql | pdo_mysql | mbstring | exif | pcntl | bcmath | gd | mysqli 
+
+- Banco de Dados
 
 
- - <strong>Não Contem Banco de Dados</strong>
-
-
-<h1>Instalação do Docker (pré requisitos) </h1>
+<h1>Instalação do Docker (pré-requisito) </h1>
 <h2> Windows WSL2</h2>
 
 ### https://github.com/codeedu/wsl2-docker-quickstart#docker-engine-docker-nativo-diretamente-instalado-no-wsl2
@@ -37,66 +20,40 @@
 
 ### https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04-pt
 
-
 <hr/>
 
 <h1> Comandos </h1>
 
+<h3>Configuração do Ambiente</h3>
 - Clone do Repositório: https://github.com/r4fael/ambiente-laravel-docker.git
+
+- Caso precise dos containers de banco de dados e servidor web, descomente eles no arquivo docker-compose.yaml
 
 - Acesse a pasta do projeto e faça o build do ambiente: ``` docker-compose up -d --build ```. 
 Vai demorar um pouco baixando e instalando todas as dependências para criar os containers.
-Caso precise rodar mais de um ambiente, renomeie o containers e redes dentro do arquivo docker-compose.yml para não conflitar com containers já instanciados.
+Caso precise rodar mais de um ambiente, renomeie o containers e redes dentro do arquivo docker-compose.yaml para não conflitar com containers já instanciados.
 
-- Depois de finalizar, veja se os container estão ativos: ``` docker ps ```.
-Se precisar parar algum ambinete, entre na pasta que está o docker-compose.yml e use o comando ``` docker-compose down ``` ou ``` docker stop (nome do container que pode saber pelo docker ps) ```.
+- Depois de finalizar, veja se os container estão ativos: ``` docker ps ```. 
+Se precisar parar algum ambinete, entre no diretório que está o docker-compose.yaml e use o comando ``` docker-compose down ``` ou ``` docker stop (nome do container. Veja eles com o docker ps, esse comando pode ser feito de qualquer diretório) ```.
 
-- Se quiser, adicione as instruções para carregar a imagem do banco de dados da sua preferência no arquivo docker-compose-yml. Exemplo (
-não esquecer e fazer o build novamente): 
-
-````
-mysql:
-    image: mysql
-    command: --default-authentication-plugin=mysql_native_password
-    container_name: mysql
-    restart: unless-stopped
-    environment:
-      MYSQL_ROOT_PASSWORD: **colocar-a-senha-do-root-aqui**
-    ports:
-      - "3306:3306"
-    networks:
-      - app-network
-    volumes:
-      - ./dados:/var/lib/mysql
-````
-
-````
-
-postgres:
-  container_name: postgres
-  image: postgres:14.4-alpine
-  restart: always
-  environment:
-    POSTGRES_DB: **nome-base-de-dados**
-    POSTGRES_USER: **nome-user**
-    POSTGRES_PASSWORD: **senha**
-  ports:
-    - 5432:5432
-  networks:
-    - app-network
-  volumes:
-    - ./database/data:/var/lib/postgresql/data
-
-````
+- Se for adiciona novos containers, como o de banco de dados, não esqueça de fazer o build novamente. 
 
 
 É possível ainda criar um docker-compose.yml em outra pasta para separar o banco de dados para utilizar em outros projetos. Lembre de mapear a pasta de dados (volumes) e expor a porta para acesso externo (ports)
 
 
-- Acesse o ambiente pelo terminal pelos comando: ``` docker-compose exec -it app bash ``` . O terminal deve estar na mesma pasta que o docker-compose-yml
+<h3>Acessando o Ambiente</h3>
 
-- Rode os comandos laravel neste terminal. Para sair: ``` exit ```.
+- Para acessar o terminal do ambiente, acesse o diretório do projeto e execute o comando: ``` docker-compose exec -it app bash ``` . será através deles que você rodará os comandos do artisan e composer. 
 
-- Criando um novo projeto: ``` composer create-project laravel/laravel example-app ```
+- Para voltar ao terminal da sua máquina use o comando ``` exit ```.
+
+<h3>Novo Projeto</h3>
+
+- Depois de acessar o ambiente via terminl é possivel criar um novo projeto: ``` composer create-project laravel/laravel example-app ``` ou fazer o clone do seu repositório.
+
+- Mova os arquivos e diretórios (inclusive ocultos) gerados ou clonados para a pasta que contem o Dockerfile e o docker-compose-yaml: ``` rsync -rtv <nome-da-pasta-do-projeto>/ . ```. Após isso pode excluir a pasta original: ``` rm -r <nome-da-pasta-do-projeto> ```
+
+- Inicie o Servidor de desenvolvimento ``` php artisan serve ```
 
 - Acesse o ambiente na porta configurada: http://localhost:8000/
