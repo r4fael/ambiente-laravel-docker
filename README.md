@@ -74,8 +74,8 @@ Se precisar parar algum ambinete, entre no diretório que está o docker-compose
 
 - Mova os arquivos e diretórios (inclusive ocultos) gerados ou clonados para a pasta que contem o Dockerfile e o docker-compose-yaml: ```rsync -rtv <nome-da-pasta-do-projeto>/ .``` . Após isso pode excluir a pasta original: ``` rm -r <nome-da-pasta-do-projeto> ``` .
 
-- Inicie o Servidor de desenvolvimento ``` php artisan serve ``` .
+- Inicie o Servidor de desenvolvimento ```php artisan serve --host=0.0.0.0```  e acesse o ambiente no endereço que o artisan expor: http://localhost:8000/ .
 
-- Acesse o ambiente no endereço que o artisan expor: http://localhost:8000/ .
+Você poderá também acessar o sistema atraves do servidor NGINX, caso esteja habilitado no endereço http://localhost:9000/
 
 Boa sorte!
