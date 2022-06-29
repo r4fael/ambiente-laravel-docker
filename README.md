@@ -1,7 +1,8 @@
 <h1>Ambiente Dev PHP Laravel</h1>
 
-<p>O ambiente foi pensado para agilisar a criação de um abiente de desenvolvimento para aplicações laravel.<p>
+<p>A rotina foi pensada para agilisar a criação de um ambiente de desenvolvimento Laravel sem precisar instalar o php, composer e outros programas necessários para utilizar o framework.<p>
  
+<p><strong>Essa versão não é recomendada para o uso em produção.</strong></p>
 
 - PHP 8.1-fpm
 
