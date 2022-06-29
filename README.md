@@ -1,33 +1,46 @@
 <h1>Ambiente Dev PHP Laravel</h1>
+
+<p>O ambiente foi pensado para agilisar a criação de um abiente de desenvolvimento para aplicações laravel.<p>
+ 
+
 - PHP 8.1-fpm
+
 - Composer (latest)
+
 - GIT (latest)
+
 - NGINX Alpine (latest)
+
 - NodeJs (latest)
+
 - NPM (latest)
 
 - Extras: curl | libpng-dev | libonig-dev | libxml2-dev | libpq-dev | zip | unzip | pdo | pdo_pgsql | pdo_mysql | mbstring | exif | pcntl | bcmath | gd | mysqli 
 
-- Banco de Dados
+- Banco de Dados Postgres e Mysql (desativados por padrão)
+
+- Servidor Web NGINX (desativado por padrão)
 
 
-<h1>Instalação do Docker (pré-requisito) </h1>
-<h2> Windows WSL2</h2>
+<h2>Instalação do Docker (pré-requisito) </h2>
 
-### https://github.com/codeedu/wsl2-docker-quickstart#docker-engine-docker-nativo-diretamente-instalado-no-wsl2
+<h3>Via  Windows WSL2</h3>
 
-<h2>Linux</h2>
+- https://github.com/codeedu/wsl2-docker-quickstart#docker-engine-docker-nativo-diretamente-instalado-no-wsl2
 
-### https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04-pt
+<h3>Via Linux</h3>
+
+- https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04-pt
 
 <hr/>
 
-<h1> Comandos </h1>
+<h2>USO</h2>
 
 <h3>Configuração do Ambiente</h3>
+
 - Clone do Repositório: https://github.com/r4fael/ambiente-laravel-docker.git
 
-- Caso precise dos containers de banco de dados e servidor web, descomente eles no arquivo docker-compose.yaml
+- Caso precise dos containers de banco de dados e servidor web, descomente eles no arquivo docker-compose.yaml. Antes de modificar este arquivo é recomendado que os containers que ele gerencia estejam desligados.
 
 - Acesse a pasta do projeto e faça o build do ambiente: ``` docker-compose up -d --build ```. 
 Vai demorar um pouco baixando e instalando todas as dependências para criar os containers.
@@ -48,12 +61,12 @@ Se precisar parar algum ambinete, entre no diretório que está o docker-compose
 
 - Para voltar ao terminal da sua máquina use o comando ``` exit ```.
 
-<h3>Novo Projeto</h3>
+<h3>Novo Projeto ou Clonando um Existente</h3>
 
-- Depois de acessar o ambiente via terminl é possivel criar um novo projeto: ``` composer create-project laravel/laravel example-app ``` ou fazer o clone do seu repositório.
+- Depois de acessar o ambiente via terminal é possivel criar um novo projeto: ``` composer create-project laravel/laravel example-app ``` ou fazer o clone do seu repositório.
 
-- Mova os arquivos e diretórios (inclusive ocultos) gerados ou clonados para a pasta que contem o Dockerfile e o docker-compose-yaml: ``` rsync -rtv <nome-da-pasta-do-projeto>/ . ```. Após isso pode excluir a pasta original: ``` rm -r <nome-da-pasta-do-projeto> ```
+- Mova os arquivos e diretórios (inclusive ocultos) gerados ou clonados para a pasta que contem o Dockerfile e o docker-compose-yaml: ``` rsync -rtv <nome-da-pasta-do-projeto>/ .``` . Após isso pode excluir a pasta original: ``` rm -r <nome-da-pasta-do-projeto> ``` .
 
-- Inicie o Servidor de desenvolvimento ``` php artisan serve ```
+- Inicie o Servidor de desenvolvimento ``` php artisan serve ``` .
 
-- Acesse o ambiente na porta configurada: http://localhost:8000/
+- Acesse o ambiente na porta configurada: http://localhost:8000/ .
