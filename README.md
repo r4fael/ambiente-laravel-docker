@@ -1,6 +1,6 @@
-<h1>Ambiente Dev PHP Laravel</h1>
+<h1>Ambiente Docker para desenvolvimento de aplicações PHP Laravel</h1>
 
-<p>A rotina foi pensada para agilisar a criação de um ambiente de desenvolvimento Laravel sem precisar instalar o php, composer e outros programas necessários para utilizar o framework.<p>
+<p>O objetivo é agilisar a criação de um ambiente de desenvolvimento Laravel sem precisar instalar o php, composer e outros programas necessários para utilizar o framework. Tudo isso dentro de containers garantindo que a aplicação seja replicada sem quebras em outros ambientes.<p>
  
 <p><strong>Essa versão não é recomendada para o uso em produção.</strong></p>
 
@@ -16,7 +16,7 @@
 
 - NPM (latest)
 
-- Extras: curl | libpng-dev | libonig-dev | libxml2-dev | libpq-dev | zip | unzip | rsync | pdo | pdo_pgsql | pdo_mysql | mbstring | exif | pcntl | bcmath | gd | mysqli 
+- Extras: curl | libpng-dev | libonig-dev | libxml2-dev | libpq-dev | zip | unzip | rsync | pdo | pdo_pgsql | pdo_mysql | mbstring | exif | pcntl | bcmath | gd | mysqli | rsync
 
 - Banco de Dados Postgres e Mysql (desativados por padrão)
 
@@ -33,7 +33,9 @@
 
 - https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04-pt
 
-<hr/>
+<h2>Instação do Docker Compose</h2>
+
+- https://docs.docker.com/compose/install/compose-plugin/#installing-compose-on-linux-systems  
 
 <h2>USO</h2>
 
@@ -45,7 +47,7 @@
 
 - Caso precise dos containers de banco de dados e servidor web, descomente eles no arquivo docker-compose.yaml. Antes de modificar este arquivo é recomendado que os containers que ele gerencia estejam desligados. 
 
-- Acesse a pasta do projeto ```cd <nome-do-projeto>``` e faça o build do ambiente: ```docker-compose up -d --build```. 
+- Acesse a pasta do projeto ```cd <nome-do-projeto>``` e faça o build do ambiente: ```docker-compose up -d --build```. Para o Docker Compose mais recente não precisa de hífen:  ```docker compose up -d --build```.
 
 Vai demorar um pouco baixando e instalando todas as dependências para criar os containers se for a primeira vez.
 
