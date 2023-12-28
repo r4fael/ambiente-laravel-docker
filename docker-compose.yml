@@ -1,5 +1,10 @@
 version: "3.7"
 
+networks:
+    default:
+        name: ${APP_SLUG}-network
+        driver: bridge
+
 services:
     # image project
     app:
@@ -15,7 +20,7 @@ services:
             - redis
             - db
         networks:
-            - ${APP_SLUG}-network
+            - default
 
     # nginx
     nginx:
@@ -28,7 +33,7 @@ services:
             - ./:/var/www
             - ./docker/nginx/:/etc/nginx/conf.d/
         networks:
-            - ${APP_SLUG}-network
+            - default
 
     # db mysql
     db:
@@ -46,16 +51,11 @@ services:
         ports:
             - "${DB_PORT}:${DB_PORT}"
         networks:
-            - ${APP_SLUG}-network
+            - default
 
     # redis
     redis:
         image: redis:latest
         container_name: redis-${APP_SLUG}
         networks:
-            - ${APP_SLUG}-network
-
-networks:
-    default:
-        name: ${APP_SLUG}-network
-        driver: bridge
+            - default
