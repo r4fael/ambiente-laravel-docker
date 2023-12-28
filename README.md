@@ -88,21 +88,28 @@ Verifique se os container estão ativos: ```docker ps```.  Use  ```docker-compos
 
 Acesse o container
 ```sh
-docker-compose exec app-<<APP_SLUG>> bash 
-# ou 'docker exec -it <nome-do-container> bash'
+docker exec -it <<nome-do-container>> bash
 ```
 
 
-Instale o Laravel na raiz da pasta atual
+Instale o Laravel em uma pasta chamada "temp". 
+Depois iremos mover o conteúdo para a raiz do projeto, pois o Laravel não consegue criar um novo projeto em uma pasta que já contenha arquivos
 ```sh
-composer create-project laravel/laravel .
+composer create-project laravel/laravel temp 
+```
+
+Mova os arquivos para a raiz do projeto e apague a pasta "temp".
+**importante ignorar o .env da nova instalação**. Depois no .env.example você poderá verificar se exister alguma variável que precisa ser adicionada 
+```sh
+rsync -a --exclude=.env /var/www/temp/ . && rm -Rf /var/www/temp
 ```
 
 
 Gere a key do projeto Laravel
 ```sh
-php artisan key:generate
+php artisan key:generate && php artisan migrate && php artisan db:seed
 ```
+
 
 
 Acesse o projeto
