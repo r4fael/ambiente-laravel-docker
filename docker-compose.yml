@@ -32,7 +32,7 @@ services:
 
     # db mysql
     db:
-        image: mysql:5.7.22
+        image: mysql:8.2
         container_name: db-${APP_SLUG}
         platform: linux/x86_64
         restart: unless-stopped
