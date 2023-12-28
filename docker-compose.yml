@@ -20,7 +20,7 @@ services:
             - redis
             - db
         networks:
-            - default
+            - ${APP_SLUG}-network
 
     # nginx
     nginx:
@@ -33,7 +33,7 @@ services:
             - ./:/var/www
             - ./.docker/nginx/:/etc/nginx/conf.d/
         networks:
-            - default
+            - ${APP_SLUG}-network
 
     # db mysql
     db:
@@ -51,11 +51,11 @@ services:
         ports:
             - ${DB_PORT}:${DB_PORT}
         networks:
-            - default
+            - ${APP_SLUG}-network
 
     # redis
     redis:
         image: redis:latest
         container_name: redis-${APP_SLUG}
         networks:
-            - default
+            - ${APP_SLUG}-network
