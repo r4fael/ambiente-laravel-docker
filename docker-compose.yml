@@ -56,5 +56,6 @@ services:
             - ${APP_SLUG}-network
 
 networks:
-    ${APP_SLUG}-network:
+    default:
+        name: ${APP_SLUG}-network
         driver: bridge
