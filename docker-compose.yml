@@ -1,10 +1,5 @@
 version: "3.7"
 
-networks:
-    default:
-        name: ${APP_SLUG}-network
-        driver: bridge
-
 services:
     # image project
     app:
@@ -20,7 +15,7 @@ services:
             - redis
             - db
         networks:
-            - ${APP_SLUG}-network
+            - laravel-network
 
     # nginx
     nginx:
@@ -33,7 +28,7 @@ services:
             - ./:/var/www
             - ./.docker/nginx/:/etc/nginx/conf.d/
         networks:
-            - ${APP_SLUG}-network
+            - laravel-network
 
     # db mysql
     db:
@@ -51,11 +46,15 @@ services:
         ports:
             - ${DB_PORT}:${DB_PORT}
         networks:
-            - ${APP_SLUG}-network
+            - laravel-network
 
     # redis
     redis:
         image: redis:latest
         container_name: redis-${APP_SLUG}
         networks:
-            - ${APP_SLUG}-network
+            - laravel-network
+
+networks:
+    laravel-network:
+        driver: bridge
