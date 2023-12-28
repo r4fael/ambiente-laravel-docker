@@ -44,13 +44,16 @@ O objetivo é agilisar a criação de um ambiente de desenvolvimento Laravel sem
 - https://docs.docker.com/compose/install/compose-plugin/#installing-compose-on-linux-systems  
 
 
-------------------------------------------------------------
 
+---
+
+# Mãos a Obra
 
 ## Passo a passo para usar o ambiente dev
+
 Clone o projeto
 ```sh
-git clone <<endereço-do-repositorio-git>> <<nome-do-projeto>>
+git clone git@github.com:r4fael/ambiente-laravel-docker.git <<nome-do-projeto>>
 ```
 ```sh
 cd <<nome-do-projeto>>
