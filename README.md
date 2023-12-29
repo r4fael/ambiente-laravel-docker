@@ -89,7 +89,7 @@ composer create-project laravel/laravel temp
 Mova os arquivos para a raiz do projeto e apague a pasta "temp".
 **importante ignorar o .env da nova instalação**. Depois no .env.example você poderá verificar se exister alguma variável que precisa ser adicionada.
 ```sh
-rsync -a --exclude=.env /var/www/temp/ . && rm -Rf /var/www/temp
+rsync -r --exclude=.env /var/www/temp/ . && rm -Rf /var/www/temp
 ```
 
 
