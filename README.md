@@ -60,12 +60,12 @@ cd <<nome-do-projeto>>
 ```
 
 
-Altere as variáveis do .env que serão usadas no projeto
+Utilizar o .env e alterer as variáveis para o projeto
 ```sh
-nano .env
+cp .env.example.docker .env
 ```
 
-Suba os containers do projeto ()
+Suba os containers do projeto
 ```sh
 docker compose up -d
 #se estiver rodando a versão mais antiga do composer utilise 'docker-compose up -d'
