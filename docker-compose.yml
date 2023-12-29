@@ -6,7 +6,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        container_name: app-${APP_SLUG}
+        container_name: app-${APP_SLUG:-laravel}
         restart: unless-stopped
         working_dir: /var/www/
         volumes:
@@ -15,7 +15,7 @@ services:
             - redis
             - db
         networks:
-            - laravel-network
+            - default
 
     # nginx
     nginx:
@@ -28,7 +28,7 @@ services:
             - ./:/var/www
             - ./.docker/nginx/:/etc/nginx/conf.d/
         networks:
-            - laravel-network
+            - default
 
     # db mysql
     db:
@@ -46,15 +46,21 @@ services:
         ports:
             - ${DB_PORT}:${DB_PORT}
         networks:
-            - laravel-network
+            - default
 
     # redis
     redis:
         image: redis:latest
-        container_name: redis-${APP_SLUG}
+        container_name: redis-${APP_SLUG:-laravel}
+        restart: unless-stopped
+        environment:
+           REDIS_PASSWORD: ${REDIS_PASSWORD}
+           REDIS_HOST: ${REDIS_HOST}
+           REDIS_PORT: ${REDIS_PORT}
         networks:
-            - laravel-network
+            - default
 
 networks:
-    laravel-network:
+    default:
+        name: net-${APP_SLUG:-laravel}
         driver: bridge

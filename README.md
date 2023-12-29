@@ -60,37 +60,25 @@ cd <<nome-do-projeto>>
 ```
 
 
-Crie o Arquivo .env 
+Altere as variáveis do .env que serão usadas no projeto
 ```sh
-cp .env.example.docker .env
+nano .env
 ```
-
-
-Atualize essas variáveis no arquivo .env com as informações do projeto
-```dosini
-APP_NAME="Especializa Ti"
-APP_URL=http://localhost:8989
-.
-.
-.
-```
-
 
 Suba os containers do projeto ()
 ```sh
-docker-compose up -d
-#se estiver rodando a versão mais nova do composer utilise 'docker compose up -d'
+docker compose up -d
+#se estiver rodando a versão mais antiga do composer utilise 'docker-compose up -d'
 ```
 
-Alterando dados sensíveis do Dockerfile faça o build ```docker compose up -d --build```.
+Caso altere dados sensíveis do Dockerfile ou docker-compose.yml, faça o build ```docker compose up -d --build```.
 
 Verifique se os container estão ativos: ```docker ps```.  Use  ```docker-compose down``` para pará-los se necessário.
 
-Acesse o container
+Acesse o container da aplicação (Por padrão é que começa com "app-")
 ```sh
 docker exec -it <<nome-do-container>> bash
 ```
-
 
 Instale o Laravel em uma pasta chamada "temp". 
 Depois iremos mover o conteúdo para a raiz do projeto, pois o Laravel não consegue criar um novo projeto em uma pasta que já contenha arquivos
@@ -99,7 +87,7 @@ composer create-project laravel/laravel temp
 ```
 
 Mova os arquivos para a raiz do projeto e apague a pasta "temp".
-**importante ignorar o .env da nova instalação**. Depois no .env.example você poderá verificar se exister alguma variável que precisa ser adicionada. o ao final da configuraçao do ambiente poderá iniciar outro versionador.
+**importante ignorar o .env da nova instalação**. Depois no .env.example você poderá verificar se exister alguma variável que precisa ser adicionada.
 ```sh
 rsync -a --exclude=.env /var/www/temp/ . && rm -Rf /var/www/temp
 ```
