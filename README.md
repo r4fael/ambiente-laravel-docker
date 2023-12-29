@@ -59,46 +59,55 @@ git clone git@github.com:r4fael/ambiente-laravel-docker.git <<nome-do-projeto>>
 cd <<nome-do-projeto>>
 ```
 
-
-Utilizar o .env e alterer as variáveis para o projeto
+Utilizar o .env.example.docker para o projeto
 ```sh
 cp .env.example.docker .env
+```
+
+Alterar as variáveis do arquivo .env
+```sh
+APP_NAME=LaravelApp
+APP_SLUG=laravelapp
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_PORT=3000 #usado pelo nginx
+APP_URL=http://localhost
+.
+.
+.
 ```
 
 Suba os containers do projeto
 ```sh
 docker compose up -d
-#se estiver rodando a versão mais antiga do composer utilise 'docker-compose up -d'
+#se estiver rodando a versão mais antiga do composer utilize 'docker-compose up -d'
 ```
 
 Caso altere dados sensíveis do Dockerfile ou docker-compose.yml, faça o build ```docker compose up -d --build```.
 
 Verifique se os container estão ativos: ```docker ps```.  Use  ```docker-compose down``` para pará-los se necessário.
 
-Acesse o container da aplicação (Por padrão é que começa com "app-")
+Acesse o container da aplicação (O padrão atual começa com "app-"). Será através desse container que lidaremos com o desenvolvimento da aplicação para usar, por exemplo, comados do composer e do php artisan.
 ```sh
 docker exec -it <<nome-do-container>> bash
 ```
 
 Instale o Laravel em uma pasta chamada "temp". 
-Depois iremos mover o conteúdo para a raiz do projeto, pois o Laravel não consegue criar um novo projeto em uma pasta que já contenha arquivos
+Depois iremos mover o conteúdo para a raiz do projeto, pois o Laravel não consegue criar um novo projeto em uma pasta que já contem arquivos. 
 ```sh
 composer create-project laravel/laravel temp 
 ```
 
-Mova os arquivos para a raiz do projeto e apague a pasta "temp".
-**importante ignorar o .env da nova instalação**. Depois no .env.example você poderá verificar se exister alguma variável que precisa ser adicionada.
+Mova os arquivos para a raiz do projeto e apague a pasta "temp". Será **importante ignorar o .env da nova instalação** para não sobrepor os valores atuais. Depois no .env.example oriundo do Laravel, você poderá verificar se existe alguma variável que precisa ser adicionada. Utilize o comando aabixo para copiar todos os arquivos e depois apagar a pasta "temp"
 ```sh
 rsync -r --exclude=.env /var/www/temp/ . && rm -Rf /var/www/temp
 ```
 
-
-Gere a key do projeto Laravel
+Gere a key do projeto Laravel, rode as migrates e seeds
 ```sh
 php artisan key:generate && php artisan migrate && php artisan db:seed
 ```
 
-
-
-Acesse o projeto
+Acesse o projeto na porta definida no .env na variável "APP_PORT"
 http://localhost:<<APP_PORT>> 
