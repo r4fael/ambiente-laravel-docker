@@ -24,7 +24,7 @@ npm install -g npm@">=9.6.7"
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd sockets
+RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd sockets intl
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
